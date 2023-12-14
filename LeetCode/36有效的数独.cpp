@@ -84,3 +84,32 @@ public:
         return true;
     }
 };
+
+class Solution2
+{
+public:
+    int rows[9][9];
+    int cols[9][9];
+    int square[3][3][9];
+
+public:
+    bool isValidSudoku(vector<vector<char>> &board)
+    {
+        for (int i = 0; i < 9; ++i)
+        {
+            for (int j = 0; j < 9; ++j)
+            {
+                if (board[i][j] != '.') {
+                    int index = board[i][j] - '0' - 1;
+                    if (rows[i][index] >= 1 || cols[j][index] >= 1 || square[i/3][j/3][index] >= 1)
+                        return false;
+                    
+                    rows[i][index]++;
+                    cols[j][index]++;
+                    square[i/3][j/3][index]++;
+                }
+            }
+        }
+        return true;
+    }
+};
